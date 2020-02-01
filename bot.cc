@@ -3,18 +3,12 @@
 
 #define _FILE_OFFSET_BITS 64
 #include <thread>
-#include <mutex>
-#include <memory>
 #include <regex>
-#include <codecvt>
-#include <fstream>
 #include <fcgio.h>
 #include <json.hpp>
-#include <sqlite3.h>
 #include <libconfig.h>
 #include <signal.h>
 
-#include "util.h"
 #include "httpclient.h"
 #include "logger.h"
 
