@@ -50,10 +50,6 @@ int main(int argc, char **argv) {
 	if (!config_lookup_string(&cfg, "logs", &logfile))
 		logfile = "/tmp/";
 
-	if (!config_lookup_string(&cfg, "api", &tmp_))
-		RET_ERR("Need an API key in the config named 'api'");
-	std::string boturlapi = "https://api.telegram.org/bot" + std::string(tmp_);
-
 	if (!config_lookup_string(&cfg, "message", &tmp_))
 		RET_ERR("Need to specify a reply message as 'message'");
 	std::string reply_message = std::string(tmp_);
