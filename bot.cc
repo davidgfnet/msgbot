@@ -8,8 +8,9 @@
 #include <json.hpp>
 #include <libconfig.h>
 #include <signal.h>
+#include <unistd.h>
+#include <fcntl.h>
 
-#include "httpclient.h"
 #include "logger.h"
 
 #define MAX_REQ_SIZE  (4*1024)
