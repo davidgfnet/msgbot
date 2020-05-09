@@ -88,24 +88,20 @@ int main(int argc, char **argv) {
 				body[bsize] = 0;
 
 				mainlogger.log("INFO Got json request " + escapenl(body));
-				try {
-					auto req = json::parse(body);
-					if (req.count("message") &&
-						req["message"].count("text") && req["message"].count("chat")) {
-
-						uint64_t u = req["message"]["chat"]["id"];
-						mainlogger.log("INFO Replying user fast " + std::to_string(u));
-						immresp = json({
-							{"method", "sendMessage"},
-							{"chat_id", u},
-							{"text", reply_message},
-							{"parse_mode", "Markdown"},
-						}).dump();
-					}
-				}
-				catch (...) {
-					// Return some error maybe?
+				auto req = json::parse(body, nullptr, false);
+				if (req.is_discarded())
 					mainlogger.log("ERROR Parsing json " + escapenl(body));
+				else if (req.count("message") &&
+					req["message"].count("text") && req["message"].count("chat")) {
+
+					uint64_t u = req["message"]["chat"]["id"];
+					mainlogger.log("INFO Replying user fast " + std::to_string(u));
+					immresp = json({
+						{"method", "sendMessage"},
+						{"chat_id", u},
+						{"text", reply_message},
+						{"parse_mode", "Markdown"},
+					}).dump();
 				}
 			}
 
