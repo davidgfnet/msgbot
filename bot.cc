@@ -64,6 +64,7 @@ int main(int argc, char **argv) {
 	signal(SIGPIPE, SIG_IGN);
 
 	Logger mainlogger(logfile);
+	mainlogger.log("INFO server start");
 
 	// Now keep ingesting incoming requests, we do this in the main
 	// thread since threads are much slower, unlikely to be a bottleneck.
